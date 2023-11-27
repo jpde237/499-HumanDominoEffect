@@ -77,7 +77,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Domino",
 "language": "GDScript",
-"path": "res://Scripts/Domino.gd"
+"path": "res://Domino.gd"
 }, {
 "base": "GdUnitTestSuite",
 "class": "DominoUnitTest",
@@ -87,7 +87,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "DominoWorld",
 "language": "GDScript",
-"path": "res://levels/Scripts/DominoWorld.gd"
+"path": "res://levels/DominoWorld.gd"
 }, {
 "base": "GdUnitArgumentMatcher",
 "class": "EqualsArgumentMatcher",
@@ -629,6 +629,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gdUnit3/src/core/LocalTime.gd"
 }, {
+"base": "Control",
+"class": "Menu",
+"language": "GDScript",
+"path": "res://Menu/Menu.gd"
+}, {
 "base": "Reference",
 "class": "RPC",
 "language": "GDScript",
@@ -849,6 +854,7 @@ _global_script_class_icons={
 "Lobby": "",
 "LobbyIntegrationTest": "",
 "LocalTime": "",
+"Menu": "",
 "RPC": "",
 "RPCClientConnect": "",
 "RPCClientDisconnect": "",
@@ -879,8 +885,7 @@ config/icon="res://sprites/gameboard.png"
 [autoload]
 
 gamestate="*res://multiplayer/gamestate.gd"
-curriculum="*res://Scripts/curriculum.gd"
-SaveManager="*res://Scripts/SaveManager.gd"
+curriculum="*res://curriculum.gd"
 
 [display]
 
@@ -970,11 +975,6 @@ Break={
 Pause={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
-}
-Save_Load={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":96,"unicode":0,"echo":false,"script":null)
  ]
 }
 

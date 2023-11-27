@@ -10,7 +10,7 @@ func _ready():
 	gamestate.connect("player_list_changed", self, "refresh_lobby")
 	gamestate.connect("game_ended", self, "_on_game_ended")
 	gamestate.connect("game_error", self, "_on_game_error")
-	SaveManager.connect("load_save_scene", self, "handle_level")
+
 	# Set the player name according to the system username. Fallback to the path.
 	if OS.has_environment("USERNAME"):
 		set_name_text(OS.get_environment("USERNAME"))
@@ -33,23 +33,27 @@ func _on_host_pressed():
 		set_error_text("Invalid name!")
 		return
 
-	#Connects to the server after hitting the host button
 	$Connect.hide()
 	$TitleBox/Title.visible = false
 	$LevelSelect/Popup.visible = true
 	set_error_text("")
-	$Players/FindPublicIP.text = "IP: " + $Connect/JoinBox/IPAddress.text
-
+	#$Players/FindPublicIP.text = "IP: " + $Connect/JoinBox/IPAddress.text
+	$Players/FindPublicIP.text = "Host: " + $Connect/StartBox/Name.text
 
 func _on_join_pressed():
 	if get_name_text() == "":
 		set_error_text("Invalid name!")
 		return
-
-	#Connects the user to the host using IP
-	var ip = $Connect/JoinBox/IPAddress.text
-	if not ip.is_valid_ip_address():
-		set_error_text("Invalid IP address!")
+	
+	#var ip =  $Connect/JoinBox/IPAddress.text
+	#if not ip.is_valid_ip_address():
+		#set_error_text("Invalid IP Address")
+		#return
+		
+	#get host name
+	var host_name = $Connect/JoinBox/IPAddress.text
+	if host_name == $Connect/StartBox/Name.text:
+		set_error_text("Host and player can not have the same name.")
 		return
 
 	set_error_text("")
@@ -57,10 +61,11 @@ func _on_join_pressed():
 	$Connect/Join.disabled = true
 
 	var player_name = get_name_text()
-	$Players/FindPublicIP.text = "IP: " + $Connect/IPAddress.text
+	#$Players/FindPublicIP.text = "IP: " + $Connect/IPAddress.text
+	$Players/FindPublicIP.text = "Host: " + host_name
 
-	gamestate.join_game(ip, player_name)
-
+	#gamestate.join_game(ip, player_name)
+	gamestate.join_game(host_name, player_name)
 
 func _on_connection_success():
 	$Connect.hide()

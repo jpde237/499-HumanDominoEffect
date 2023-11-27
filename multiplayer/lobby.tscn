@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://multiplayer/lobby.gd" type="Script" id=1]
 [ext_resource path="res://audio/background/main.ogg" type="AudioStream" id=2]
@@ -6,8 +6,11 @@
 [ext_resource path="res://UI/Font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://sprites/Domino Effect Logo.png" type="Texture" id=5]
 [ext_resource path="res://Nunito/Nunito-Regular.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://levels/Scenes/LevelSelect.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/LoadButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://levels/LevelSelect.tscn" type="PackedScene" id=7]
+[ext_resource path="res://UI/menubackground.jpg" type="Texture" id=8]
+[ext_resource path="res://Menu/Menu.gd" type="Script" id=9]
+[ext_resource path="res://UI/ChecklistBackgound.jpg" type="Texture" id=10]
+[ext_resource path="res://Menu/Checklist.gd" type="Script" id=11]
 
 [sub_resource type="Theme" id=2]
 
@@ -15,25 +18,142 @@
 size = 35
 font_data = ExtResource( 6 )
 
-[node name="Lobby" type="Control"]
+[node name="Menu" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 9 )
+
+[node name="MenuLayout" type="CanvasLayer" parent="."]
+process_priority = 1
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="MenuLayout"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 8 )
+stretch_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="MenuLayout/TextureRect"]
+position = Vector2( -1.96078, 1.34081 )
+scale = Vector2( 1.01961, 0.997758 )
+color = Color( 0.192157, 0.313726, 0.545098, 1 )
+polygon = PoolVector2Array( 2, 152, 100, 153, 97, 598, -2, 597 )
+
+[node name="CreateGame" type="Button" parent="MenuLayout/TextureRect"]
+margin_left = 4.0
+margin_top = 159.0
+margin_right = 95.0
+margin_bottom = 179.0
+grow_horizontal = 0
+text = "Go To Lobby"
+
+[node name="Checklist" type="Button" parent="MenuLayout/TextureRect"]
+margin_left = 4.0
+margin_top = 183.0
+margin_right = 95.0
+margin_bottom = 203.0
+text = "Checklist"
+
+[node name="Checklist" type="Control" parent="."]
+margin_left = -1.0
+margin_top = 2.0
+margin_right = 1026.0
+margin_bottom = 601.0
+script = ExtResource( 11 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Checklist"]
+
+[node name="TextureRect" type="TextureRect" parent="Checklist/CanvasLayer"]
+margin_left = 101.0
+margin_top = 167.0
+margin_right = 929.0
+margin_bottom = 600.0
+texture = ExtResource( 10 )
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Checklist/CanvasLayer/TextureRect"]
+margin_left = 42.0
+margin_top = 133.0
+margin_right = 101.0
+margin_bottom = 173.0
+
+[node name="add_item" type="Button" parent="Checklist/CanvasLayer/TextureRect"]
+margin_left = 41.0
+margin_top = 100.0
+margin_right = 113.0
+margin_bottom = 120.0
+text = "Add Item"
+
+[node name="WindowDialog" type="WindowDialog" parent="Checklist/CanvasLayer/TextureRect/add_item"]
+visible = true
+margin_left = 209.0
+margin_top = 66.0
+margin_right = 551.0
+margin_bottom = 216.0
+window_title = "Rename Item"
+
+[node name="MarginContainer" type="MarginContainer" parent="Checklist/CanvasLayer/TextureRect/add_item/WindowDialog"]
+margin_left = 9.0
+margin_top = 14.0
+margin_right = 334.0
+margin_bottom = 137.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Checklist/CanvasLayer/TextureRect/add_item/WindowDialog/MarginContainer"]
+margin_right = 325.0
+margin_bottom = 123.0
+
+[node name="LineEdit" type="LineEdit" parent="Checklist/CanvasLayer/TextureRect/add_item/WindowDialog/MarginContainer/VBoxContainer"]
+margin_top = 37.0
+margin_right = 325.0
+margin_bottom = 61.0
+size_flags_horizontal = 7
+size_flags_vertical = 6
+align = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Confirm" type="Button" parent="Checklist/CanvasLayer/TextureRect/add_item/WindowDialog/MarginContainer/VBoxContainer"]
+margin_left = 131.0
+margin_top = 103.0
+margin_right = 193.0
+margin_bottom = 123.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Confirm"
+
+[node name="remove_item" type="CheckBox" parent="Checklist/CanvasLayer/TextureRect"]
+margin_left = 138.0
+margin_top = 100.0
+margin_right = 157.0
+margin_bottom = 120.0
+text = "Remove Item"
+
+[node name="Lobby" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="Lobby"]
 layer = -1
 follow_viewport_enable = true
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="Lobby/CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 1.0
+margin_bottom = 2.0
 mouse_filter = 2
 texture = ExtResource( 3 )
 expand = true
 
-[node name="TitleBox" type="Panel" parent="."]
+[node name="TitleBox" type="Panel" parent="Lobby"]
 anchor_left = 0.26
 anchor_top = 0.5
 anchor_right = 0.5
@@ -44,24 +164,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 2 )
 
-[node name="Title" type="Sprite" parent="TitleBox"]
+[node name="Title" type="Sprite" parent="Lobby/TitleBox"]
+position = Vector2( 329.6, 287 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
 
-[node name="Players" type="Panel" parent="."]
-visible = false
+[node name="Players" type="Panel" parent="Lobby"]
 anchor_left = 0.675
 anchor_top = 0.5
 anchor_right = 0.775
 anchor_bottom = 0.5
-margin_left = -126.0
-margin_top = -177.5
-margin_right = 126.0
-margin_bottom = 177.5
+margin_left = 636.0
+margin_top = 85.0
+margin_right = 888.0
+margin_bottom = 440.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="Label" type="Label" parent="Players"]
+[node name="Label" type="Label" parent="Lobby/Players"]
 margin_left = 26.0
 margin_top = 18.0
 margin_right = 142.0
@@ -70,7 +190,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Awaiting Players..."
 
-[node name="Start" type="Button" parent="Players"]
+[node name="Start" type="Button" parent="Lobby/Players"]
 anchor_left = 0.5
 anchor_top = 0.9
 anchor_right = 0.5
@@ -81,7 +201,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "START!"
 
-[node name="List" type="ItemList" parent="Players"]
+[node name="List" type="ItemList" parent="Lobby/Players"]
 anchor_left = 0.1
 anchor_top = 0.125
 anchor_right = 0.9
@@ -91,7 +211,7 @@ grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="FindPublicIP" type="Label" parent="Players"]
+[node name="FindPublicIP" type="Label" parent="Lobby/Players"]
 margin_left = 1.5
 margin_top = -50.5
 margin_right = 245.5
@@ -102,22 +222,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Connect" type="Panel" parent="."]
+[node name="Connect" type="Panel" parent="Lobby"]
 anchor_left = 0.45
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 55.0
-margin_top = -108.0
-margin_right = 455.0
-margin_bottom = 117.0
+margin_left = 583.0
+margin_top = 164.0
+margin_right = 983.0
+margin_bottom = 389.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 2 )
 
-[node name="NameLabel" type="Label" parent="Connect"]
+[node name="NameLabel" type="Label" parent="Lobby/Connect"]
 anchor_left = 0.5
 anchor_top = 0.1
 anchor_right = 0.5
@@ -129,7 +249,7 @@ text = "Name:"
 align = 3
 valign = 3
 
-[node name="IPLabel" type="Label" parent="Connect"]
+[node name="IPLabel" type="Label" parent="Lobby/Connect"]
 anchor_left = 0.5
 anchor_top = 0.6
 anchor_right = 0.5
@@ -139,11 +259,11 @@ grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
-text = "IP:"
+text = "Host Name:"
 align = 1
 valign = 1
 
-[node name="StartBox" type="Panel" parent="Connect"]
+[node name="StartBox" type="Panel" parent="Lobby/Connect"]
 anchor_left = 0.125
 anchor_top = 0.25
 anchor_right = 0.875
@@ -153,14 +273,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 2 )
 
-[node name="Name" type="LineEdit" parent="Connect/StartBox"]
+[node name="Name" type="LineEdit" parent="Lobby/Connect/StartBox"]
 margin_right = 200.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 custom_fonts/font = ExtResource( 4 )
 text = "Player"
 
-[node name="Host" type="Button" parent="Connect/StartBox"]
+[node name="Host" type="Button" parent="Lobby/Connect/StartBox"]
 anchor_left = 0.75
 anchor_right = 1.0
 margin_top = 2.0
@@ -168,7 +288,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Host"
 
-[node name="ErrorLabel" type="Label" parent="Connect"]
+[node name="ErrorLabel" type="Label" parent="Lobby/Connect"]
 margin_left = 105.2
 margin_top = 189.0
 margin_right = 347.2
@@ -178,7 +298,7 @@ size_flags_vertical = 0
 custom_colors/font_color = Color( 0.820312, 0.291595, 0.291595, 1 )
 align = 1
 
-[node name="JoinBox" type="Panel" parent="Connect"]
+[node name="JoinBox" type="Panel" parent="Lobby/Connect"]
 anchor_left = 0.125
 anchor_top = 0.7
 anchor_right = 0.875
@@ -187,46 +307,52 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 2 )
 
-[node name="IPAddress" type="LineEdit" parent="Connect/JoinBox"]
+[node name="IPAddress" type="LineEdit" parent="Lobby/Connect/JoinBox"]
 margin_right = 200.0
 margin_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
-text = "127.0.0.1"
+text = "Host Name"
 
-[node name="Join" type="Button" parent="Connect/JoinBox"]
+[node name="Join" type="Button" parent="Lobby/Connect/JoinBox"]
 anchor_left = 0.75
 anchor_right = 1.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Join"
 
-[node name="ErrorDialog" type="AcceptDialog" parent="."]
-margin_right = 55.0
-margin_bottom = 58.0
+[node name="ErrorDialog" type="AcceptDialog" parent="Lobby"]
+visible = true
+margin_left = 511.0
+margin_top = 285.0
+margin_right = 594.0
+margin_bottom = 343.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Lobby"]
 stream = ExtResource( 2 )
 autoplay = true
 
-[node name="LevelSelect" parent="." instance=ExtResource( 7 )]
+[node name="LevelSelect" parent="Lobby" instance=ExtResource( 7 )]
+visible = false
 
-[node name="LoadButton" parent="LevelSelect/Popup" index="5" instance=ExtResource( 8 )]
-position = Vector2( 715, 30 )
-scale = Vector2( 1.5, 1.5 )
+[node name="Node" type="Node" parent="Lobby"]
 
-[node name="Node" type="Node" parent="."]
+[connection signal="pressed" from="MenuLayout/TextureRect/CreateGame" to="." method="_on_gotolobby_pressed"]
+[connection signal="pressed" from="MenuLayout/TextureRect/Checklist" to="." method="_on_Checklist_pressed"]
+[connection signal="pressed" from="Checklist/CanvasLayer/TextureRect/add_item" to="Checklist" method="_on_add_item_pressed"]
+[connection signal="text_entered" from="Checklist/CanvasLayer/TextureRect/add_item/WindowDialog/MarginContainer/VBoxContainer/LineEdit" to="Checklist" method="_on_LineEdit_text_entered"]
+[connection signal="pressed" from="Checklist/CanvasLayer/TextureRect/add_item/WindowDialog/MarginContainer/VBoxContainer/Confirm" to="Checklist" method="_on_Confirm_pressed"]
+[connection signal="pressed" from="Checklist/CanvasLayer/TextureRect/remove_item" to="Checklist" method="_on_remove_item_pressed"]
+[connection signal="pressed" from="Lobby/Players/Start" to="Lobby" method="_on_start_pressed"]
+[connection signal="pressed" from="Lobby/Connect/StartBox/Host" to="Lobby" method="_on_host_pressed"]
+[connection signal="pressed" from="Lobby/Connect/JoinBox/Join" to="Lobby" method="_on_join_pressed"]
+[connection signal="pressed" from="Lobby/LevelSelect/Popup/Level1" to="Lobby" method="_on_Level1_pressed"]
+[connection signal="pressed" from="Lobby/LevelSelect/Popup/Level2" to="Lobby" method="_on_Level2_pressed"]
+[connection signal="pressed" from="Lobby/LevelSelect/Popup/Level3" to="Lobby" method="_on_Level3_pressed"]
+[connection signal="pressed" from="Lobby/LevelSelect/Popup/Level4" to="Lobby" method="_on_Level4_pressed"]
 
-[connection signal="pressed" from="Players/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="Connect/StartBox/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Connect/JoinBox/Join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="LevelSelect/Popup/Level1" to="." method="_on_Level1_pressed"]
-[connection signal="pressed" from="LevelSelect/Popup/Level2" to="." method="_on_Level2_pressed"]
-[connection signal="pressed" from="LevelSelect/Popup/Level3" to="." method="_on_Level3_pressed"]
-[connection signal="pressed" from="LevelSelect/Popup/Level4" to="." method="_on_Level4_pressed"]
-
-[editable path="LevelSelect"]
+[editable path="Lobby/LevelSelect"]

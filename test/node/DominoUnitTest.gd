@@ -5,8 +5,8 @@ class_name DominoUnitTest
 extends GdUnitTestSuite
 
 # TestSuite generated from
-const __source = "res://Scripts/Domino.gd"
-const __prefab_source = "res://Scenes/Domino.tscn"
+const __source = "res://Domino.gd"
+const __prefab_source = "res://Domino.tscn"
 
 var test_domino: Domino
 var domino_spy
@@ -171,7 +171,7 @@ func test_input_event_drop_domino():
 # Create a "mock" node for the domino node to call out to. We can control output of mock return values to setup specific testing scenarios.
 func init_world_mock() -> DominoWorld:
 	# Setup mock for DominoWorld.gd
-	var world_mock = mock("res://levels/Scripts/DominoWorld.gd") as DominoWorld
+	var world_mock = mock("res://levels/DominoWorld.gd") as DominoWorld
 
 	# Inject mocked world into domino
 	test_domino._world = world_mock
