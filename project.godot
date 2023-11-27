@@ -74,7 +74,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gdUnit3/src/asserts/DefaultValueProvider.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "Domino",
 "language": "GDScript",
 "path": "res://Scripts/Domino.gd"
@@ -84,7 +84,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://test/node/DominoUnitTest.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "DominoWorld",
 "language": "GDScript",
 "path": "res://levels/Scripts/DominoWorld.gd"
