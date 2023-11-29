@@ -1,19 +1,19 @@
 {
 	"0": {
 		"Players": {
-			"1": "jpde237"
+			"1": "a427mir"
 		},
 		"Points": {
 			"1": 0
 		},
 		"lydia_lion": {
-			"1": 2
+
 		},
 		"alloys": {
-			"1": 1
+
 		},
 		"footprint_tiles": {
-			"1": 1
+
 		},
 		"wellness_beads": {
 
@@ -33,6 +33,6 @@
 			"1": 0
 		},
 		"Current_Level": "World",
-		"Current_Round": 5
+		"Current_Round": 2
 	}
 }
